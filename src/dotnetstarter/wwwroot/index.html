@@ -1,23 +1,52 @@
-﻿<!DOCTYPE html>
-<html lang="en">
+<!DOCTYPE html>
+<html>
 <head>
-    <title>ASP.NET Core Starter Application</title>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-    <link rel="stylesheet" href="css/style.css" type="text/css" />
+    <title></title>
+	<meta charset="utf-8" />
+    <script src="Scripts/jquery-1.10.2.js" type="text/javascript"> </script>
+    <script>
+// using jQuery & 'beforeSend' callback
+$.ajax({
+    xhrFields: {
+        withCredentials: true
+    },
+    beforeSend: function (xhr) {
+        xhr.setRequestHeader('Authorization', 'Basic ' + btoa('a-5d07a8-hiitmanrob:8syl55(KEKV43fMfa3'));
+    },
+    url: "https://5d07a8.internetofthings.ibmcloud.com/api/v0002/device/types/TempMeasurement/devices"
+});
+
+// using jQuery & 'headers' property
+$.ajax({
+    xhrFields: {
+        withCredentials: true
+    },
+    headers: {
+        'Authorization': 'Basic ' + btoa('a-5d07a8-hiitmanrob:8syl55(KEKV43fMfa3')
+    },
+    url: "https://5d07a8.internetofthings.ibmcloud.com/api/v0002/device/types/TempMeasurement/devices"
+});
+
+// using XMLHttpRequest
+var xhr = new XMLHttpRequest();
+xhr.open("GET", "https://5d07a8.internetofthings.ibmcloud.com/api/v0002/device/types/TempMeasurement/devices", true);
+xhr.withCredentials = true;
+xhr.setRequestHeader("Authorization", 'Basic ' + btoa('a-5d07a8-hiitmanrob:8syl55(KEKV43fMfa3'));
+xhr.onload = function () {
+    console.log(xhr.responseText);
+};
+xhr.send();
+    </script>
+
 </head>
 <body>
-    <section id="contents">
-        <table>
-            <tr>
-                <td style='width: 30%;'>
-                    <img class="newappIcon" src="images/newapp-icon.png">
-                </td>
-                <td>
-                    <h1 id="message">Hello World!</h1>
-                    <p class='description'></p> Thank you for creating an <span class="blue">ASP.NET Core Starter Application</span>.
-                </td>
-            </tr>
-        </table>
-    </section>
+
+  Username :  <input type="text" id="txtUsername"/>
+  Password :  <input type="password" id="txtPassword"/>
+    <br /><br />
+  <input id="btn" type="button" value="Get All Device" />
+  <input id="btnClear" type="button" value="Clear" />
+    <ul id="ulDevices"></ul>
+
 </body>
 </html>
